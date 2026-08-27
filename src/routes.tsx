@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { Home } from "./pages/Home";
 import { RumSida } from "./pages/RumSida";
-import { RumDetaljSida } from "./pages/rumDetaljSida";
+import { RumDetaljSida } from "./pages/RumDetaljSida";
 
 export const router = createBrowserRouter([
   {
