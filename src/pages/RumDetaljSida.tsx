@@ -6,3 +6,5 @@ export function RumDetaljSida() {
     </div>
   );
 }
+
+export default RumDetaljSida;

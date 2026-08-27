@@ -6,3 +6,6 @@ export function RumSida() {
     </div>
   );
 }
+
+export default RumSida;
+
