@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/json-server/schema.json",
+  "rum": [
+    {
+      "id": "1",
+      "namn": "Grupprum A",
+      "plats": "Plan 2",
+      "kapacitet": 4,
+      "utrustning": ["whiteboard", "skärm"]
+    },
+    {
+      "id": "2",
+      "namn": "Grupprum B",
+      "plats": "Plan 3",
+      "kapacitet": 6,
+      "utrustning": ["projektor"]
+    }
+  ],
+  "bokningar": [
+    {
+      "id": "1",
+      "rumId": "1",
+      "email": "test@student.se",
+      "start": "2026-09-01T10:00:00",
+      "slut": "2026-09-01T11:00:00",
+      "status": "confirmed"
+    }
+  ]
+}
