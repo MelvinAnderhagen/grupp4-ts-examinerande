@@ -23,7 +23,7 @@ export const navLinks: NavItem[] = Object.keys(pages).map((path) => {
     path: isHome ? "/" : `/${fileName.toLowerCase()}`,
   }
 })
-  .filter((item) => !item.path.includes("detail"))
+  .filter((item) => !item.path.toLowerCase().includes("detalj"))
 
 const dynamicRoutes: RouteObject[] = Object.keys(pages).map((path) => {
   const fileName = path.replace("./pages/", "").replace(".tsx", "");
