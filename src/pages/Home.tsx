@@ -8,7 +8,7 @@ export function Home() {
 
       <ul>
         <li>
-          <Link to="/rum">Tillgängliga grupprum</Link>
+          <Link to="/rumsida">Tillgängliga grupprum</Link>
         </li>
       </ul>
     </div>
@@ -16,4 +16,3 @@ export function Home() {
 }
 
 export default Home;
-
