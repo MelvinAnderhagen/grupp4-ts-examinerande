@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { navLinks } from "../routes";
 
 const header = () => {
@@ -8,9 +8,7 @@ const header = () => {
         <ul>
           {navLinks.map((link) => (
             <li key={link.path}>
-              <NavLink to={link.path}>
-                {link.name}
-              </NavLink>
+              <NavLink to={link.path}>{link.name}</NavLink>
             </li>
           ))}
         </ul>
