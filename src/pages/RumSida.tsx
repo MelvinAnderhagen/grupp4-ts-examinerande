@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export function RumSida() {
   return (
@@ -7,7 +7,7 @@ export function RumSida() {
       <p>Här visas listan över alla grupprum i biblioteket.</p>
       <ul>
         <li>
-          <Link to="/RumDetaljSida">Rum</Link>
+          <Link to={`/rumdetaljsida/1`}>Rum</Link>{" "}
         </li>
       </ul>
     </div>
@@ -15,4 +15,3 @@ export function RumSida() {
 }
 
 export default RumSida;
-

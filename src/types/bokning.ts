@@ -1,4 +1,4 @@
-interface Bokning {
+export interface Bokning {
   id: string;
   roomId: string;
   bokningsEmail: string;
