@@ -1,4 +1,4 @@
-import { createBrowserRouter, type RouteObject } from "react-router-dom";
+import { createBrowserRouter, type RouteObject } from "react-router";
 import type { ComponentType } from "react";
 import App from "./App";
 
@@ -14,36 +14,44 @@ export interface NavItem {
   path: string;
 }
 
-export const navLinks: NavItem[] = Object.keys(pages).map((path) => {
-  const fileName = path.replace("./pages/", "").replace(".tsx", "");
-  const isHome = fileName.toLowerCase() === "home";
+export const navLinks: NavItem[] = Object.keys(pages)
+  .map((path) => {
+    const fileName = path.replace("./pages/", "").replace(".tsx", "");
+    const isHome = fileName.toLowerCase() === "home";
 
-  return {
-    name: isHome ? "Hem" : fileName,
-    path: isHome ? "/" : `/${fileName.toLowerCase()}`,
-  }
-})
-  .filter((item) => !item.path.includes("detail"))
+    return {
+      name: isHome ? "Hem" : fileName,
+      path: isHome ? "/" : `/${fileName.toLowerCase()}`,
+    };
+  })
+  .filter((item) => !item.path.toLowerCase().includes("detalj"));
 
 const dynamicRoutes: RouteObject[] = Object.keys(pages).map((path) => {
   const fileName = path.replace("./pages/", "").replace(".tsx", "");
 
   const isHome = fileName.toLowerCase() === "home";
+  const isDetalj = fileName.toLowerCase().includes("detalj");
 
   const module = pages[path];
-  const Component = (module.default || module[fileName] || Object.values(module)[0]) as ComponentType;
+  const Component = (module.default ||
+    module[fileName] ||
+    Object.values(module)[0]) as ComponentType;
 
   return {
-    path: isHome ? undefined : fileName.toLowerCase(),
+    path: isHome
+      ? undefined
+      : isDetalj
+        ? `${fileName.toLowerCase()}/:id`
+        : fileName.toLowerCase(),
     index: isHome ? true : undefined,
     element: Component ? <Component /> : null,
-  }
+  };
 });
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: dynamicRoutes
-  }
+    children: dynamicRoutes,
+  },
 ]);

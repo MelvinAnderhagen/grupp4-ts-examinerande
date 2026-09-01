@@ -1,8 +1,8 @@
 import { useFetch } from "../hooks/useFetch";
-import type { rum } from "../types/rum";
+import type { Rum } from "../types/rum";
 
 export function RumSida() {
-  const { data: rum, loading, error } = useFetch<rum[]>("/rum");
+  const { data: rum, loading, error } = useFetch<Rum[]>("/rum");
   return (
     <div>
       <h2>Tillgängliga Grupprum</h2>
