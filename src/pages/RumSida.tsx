@@ -13,7 +13,6 @@ export function RumSida() {
           <ul>
             <li key={r.id}>Namn: {r.name}</li>
             <li>Kapacitet: {r.capacity}</li>
-            <li>Våning: {r.location}</li>
           </ul>
         ))
       ) : (
