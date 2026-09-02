@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useFetch } from "../hooks/useFetch";
 import type { Rum } from "../types/rum";
 
@@ -17,7 +18,7 @@ export function RumSida() {
     return (
       <div>
         <h2>Tillgängliga Grupprum</h2>
-        <p>
+        <p role="alert">
           Kunde inte hämta rum just nu. Försök ladda om sidan.
           {import.meta.env.DEV && ` (${error})`}
         </p>
@@ -42,7 +43,9 @@ export function RumSida() {
       <ul>
         {rum.map((r) => (
           <li key={r.id}>
-            <strong>{r.name}</strong> — Kapacitet: {r.capacity}
+            <Link to={`/rumdetaljsida/${r.id}`}>
+              <strong>{r.name}</strong> — Kapacitet: {r.capacity}
+            </Link>
           </li>
         ))}
       </ul>
