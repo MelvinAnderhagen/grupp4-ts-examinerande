@@ -3,21 +3,49 @@ import type { Rum } from "../types/rum";
 
 export function RumSida() {
   const { data: rum, loading, error } = useFetch<Rum[]>("/rum");
+
+  if (loading) {
+    return (
+      <div>
+        <h2>Tillgängliga Grupprum</h2>
+        <p>Laddar rum...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h2>Tillgängliga Grupprum</h2>
+        <p>
+          Kunde inte hämta rum just nu. Försök ladda om sidan.
+          {import.meta.env.DEV && ` (${error})`}
+        </p>
+      </div>
+    );
+  }
+
+  if (!rum || rum.length === 0) {
+    return (
+      <div>
+        <h2>Tillgängliga Grupprum</h2>
+        <p>Inga grupprum hittades.</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <h2>Tillgängliga Grupprum</h2>
       <p>Här visas listan över alla grupprum i biblioteket.</p>
 
-      {!loading ? (
-        rum?.map((r) => (
-          <ul>
-            <li key={r.id}>Namn: {r.name}</li>
-            <li>Kapacitet: {r.capacity}</li>
-          </ul>
-        ))
-      ) : (
-        <p>Laddar...</p>
-      )}
+      <ul>
+        {rum.map((r) => (
+          <li key={r.id}>
+            <strong>{r.name}</strong> — Kapacitet: {r.capacity}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
