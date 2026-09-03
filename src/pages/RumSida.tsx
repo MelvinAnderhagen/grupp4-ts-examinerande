@@ -2,6 +2,9 @@ import { Link } from "react-router";
 import { useFetch } from "../hooks/useFetch";
 import type { Rum } from "../types/rum";
 
+export const navOrder = 2;
+export const navTitle = "Rum";
+
 export function RumSida() {
   const { data: rum, loading, error } = useFetch<Rum[]>("/rum");
 
