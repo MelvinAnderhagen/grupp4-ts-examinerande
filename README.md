@@ -1,32 +1,43 @@
-# React + TypeScript + Vite
+# Grupprumsbokning - Bibliotek - Grupp 4.
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Ett bokningssystem för studie- och grupprum på ett bibliotek, byggt som en Single Page Application (SPA) med React, TypeScript och json-server.
 
-Currently, two official plugins are available:
+Projektet är en examinationsuppgift inom kursen _TypeScript_ (FE25 Frontendutvecklare).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Gruppmedlemmar
 
-## React Compiler
+- Roger Björling
+- Ameer Shameel
+- Melvin Anderhagen
+- Kirey Pérez
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Domänbeskrivning
 
-## Expanding the Oxlint configuration
+### Resurser i systemet
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+1.  **Grupprum**
+2.  **Bokningar**
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+## Val av styling
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Vi har valt
+
+## Kom igång
+
+### 1. Klona repot och installera beroenden
+
+git clone
+cd grupp4-ts-examinerande
+npm install
+
+### 2. Starta json-server
+
+npm run json-server
+
+### 3. Starta klienten
+
+npm run dev
+
+### 4. För att verifiera att alla TypeScript typer kompilerar felfritt:
+
+npm run build

@@ -1,5 +1,8 @@
 import { Link } from "react-router";
 
+export const navOrder = 1;
+export const navTitle = "Hem";
+
 export function Home() {
   return (
     <div>
@@ -9,6 +12,9 @@ export function Home() {
       <ul>
         <li>
           <Link to="/rumsida">Tillgängliga grupprum</Link>
+        </li>
+        <li>
+          <Link to="/bokningarsida">Alla bokningar</Link>
         </li>
       </ul>
     </div>

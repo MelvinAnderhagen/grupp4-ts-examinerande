@@ -4,6 +4,8 @@ import App from "./App";
 
 interface PageModule {
   default?: ComponentType;
+  navOrder?: number;
+  navTitle?: string;
   [key: string]: unknown;
 }
 
@@ -14,17 +16,20 @@ export interface NavItem {
   path: string;
 }
 
-export const navLinks: NavItem[] = Object.keys(pages)
-  .map((path) => {
+export const navLinks: NavItem[] = Object.entries(pages)
+  .map(([path, module]) => {
     const fileName = path.replace("./pages/", "").replace(".tsx", "");
     const isHome = fileName.toLowerCase() === "home";
 
     return {
-      name: isHome ? "Hem" : fileName,
+      name: module.navTitle || (isHome ? "Hem" : fileName),
       path: isHome ? "/" : `/${fileName.toLowerCase()}`,
+      order: module.navOrder ?? 999,
     };
   })
-  .filter((item) => !item.path.toLowerCase().includes("detalj"));
+  .filter((item) => !item.path.toLowerCase().includes("detalj"))
+  .sort((a, b) => a.order - b.order)
+  .map(({ name, path }) => ({ name, path }));
 
 const dynamicRoutes: RouteObject[] = Object.keys(pages).map((path) => {
   const fileName = path.replace("./pages/", "").replace(".tsx", "");
