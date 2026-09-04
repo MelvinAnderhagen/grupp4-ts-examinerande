@@ -10,30 +10,36 @@ export function RumDetaljSida() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!id) return;
     Promise.all([
-      fetch(`http://localhost:3000/rum/${id}`).then((response) =>
-        response.json(),
+      fetch(`http://localhost:3000/rum/${id}`).then(
+        (res) => res.json() as Promise<Rum>,
       ),
-      fetch(`http://localhost:3000/bokningar?rumId=${id}`).then((response) =>
-        response.json(),
+      fetch(`http://localhost:3000/bokningar`).then(
+        (res) => res.json() as Promise<Bokning[]>,
       ),
     ])
-      .then(([rumData, bokningarData]) => {
+      .then(([rumData, allaBokningar]) => {
         setRum(rumData);
-        setBokningar(bokningarData);
+
+        const rummetsBokningar = allaBokningar.filter(
+          (bokningar) => String(bokningar.roomId) === String(id),
+        );
+        setBokningar(rummetsBokningar);
+
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Fel vid hämtning av rumdetaljer:", error);
+        console.error("Fel vid hämtning av data.", error);
         setLoading(false);
       });
   }, [id]);
   if (loading) {
-    return <div>Laddar rummets detaljer...</div>;
+    return <p>Laddar rummets detaljer...</p>;
   }
 
   if (!rum) {
-    return <div>Rummet hittades inte.</div>;
+    return <p>Rummet hittades inte.</p>;
   }
 
   return (
