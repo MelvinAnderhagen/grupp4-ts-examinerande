@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { postRum } from "../api/postRum";
 
 export function SkapaRum() {
@@ -12,7 +12,7 @@ export function SkapaRum() {
   } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleCreateRum = async (e: React.FormEvent) => {
+  const handleCreateRum = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setRumMessage(null);
