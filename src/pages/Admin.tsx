@@ -20,6 +20,8 @@ export function Admin() {
 
         <nav className="flex gap-2 mt-6">
           <button
+            type="button"
+            aria-pressed={activeTab === "bokningar"}
             onClick={() => setActiveTab("bokningar")}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
               activeTab === "bokningar"
@@ -30,6 +32,8 @@ export function Admin() {
             Bokningar
           </button>
           <button
+            type="button"
+            aria-pressed={activeTab === "skapa-rum"}
             onClick={() => setActiveTab("skapa-rum")}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer ${
               activeTab === "skapa-rum"
