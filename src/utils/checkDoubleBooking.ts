@@ -7,8 +7,12 @@ type BookingTime = {
 
 export function checkDoubleBooking(
   newBooking: BookingTime,
-  existingBookings: BookingTime[],
+  existingBookings: BookingTime[] | undefined,
 ) {
+  if (!existingBookings) {
+    return false;
+  }
+
   return existingBookings.some((booking) => {
     return (
       booking.roomId === newBooking.roomId &&
