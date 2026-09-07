@@ -4,10 +4,7 @@ import type { Rum } from "../types/rum";
 
 const BASE_URL = "http://localhost:3000";
 
-export const navOrder = 3;
-export const navTitle = "Bokningar";
-
-export function BokningarSida() {
+export function AdminBokningar() {
   const [bokningar, setBokningar] = useState<Bokning[]>([]);
   const [rumMap, setRumMap] = useState<Record<string, Rum>>({});
   const [loading, setLoading] = useState<boolean>(true);
@@ -98,8 +95,9 @@ export function BokningarSida() {
 
     return (
       <span
-        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${badges[status] || "bg-gray-100 text-gray-800"
-          }`}
+        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+          badges[status] || "bg-gray-100 text-gray-800"
+        }`}
       >
         {labels[status] || status}
       </span>
@@ -107,11 +105,11 @@ export function BokningarSida() {
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-4 py-8">
-      <header className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <section>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Skapade bokningar</h1>
-          <p className="text-sm text-gray-600 mt-1">
+          <h2 className="text-xl font-bold text-gray-900">Bokningar</h2>
+          <p className="text-sm text-gray-600 mt-0.5">
             Översikt över alla genomförda rumsbokningar samt möjlighet att avboka.
           </p>
         </div>
@@ -121,15 +119,16 @@ export function BokningarSida() {
         >
           Uppdatera lista
         </button>
-      </header>
+      </div>
 
       {actionMessage && (
         <aside
           role="status"
-          className={`p-4 rounded-md mb-6 ${actionMessage.type === "success"
-            ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-            : "bg-rose-50 text-rose-800 border border-rose-200"
-            }`}
+          className={`p-4 rounded-md mb-6 ${
+            actionMessage.type === "success"
+              ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+              : "bg-rose-50 text-rose-800 border border-rose-200"
+          }`}
         >
           {actionMessage.text}
         </aside>
@@ -146,19 +145,16 @@ export function BokningarSida() {
       )}
 
       {loading ? (
-        <section aria-live="polite" className="flex justify-center items-center py-16">
+        <div className="flex justify-center items-center py-16">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
           <span className="ml-3 text-gray-600">Laddar bokningar...</span>
-        </section>
+        </div>
       ) : bokningar.length === 0 ? (
         <p className="bg-white rounded-lg border border-gray-200 p-8 text-center text-gray-500">
           Inga bokningar hittades.
         </p>
       ) : (
-        <section
-          aria-label="Bokningslista"
-          className="overflow-hidden bg-white shadow-xs rounded-lg border border-gray-200"
-        >
+        <div className="overflow-hidden bg-white shadow-xs rounded-lg border border-gray-200">
           <ul className="divide-y divide-gray-200">
             {bokningar.map((bokning) => {
               const rum = rumMap[bokning.roomId];
@@ -167,11 +163,11 @@ export function BokningarSida() {
               return (
                 <li
                   key={bokning.id}
-                  className={`p-6 transition-colors ${isCancelled ? "bg-gray-50 opacity-75" : "hover:bg-gray-50"
-                    }`}
+                  className={`p-6 transition-colors ${
+                    isCancelled ? "bg-gray-50 opacity-75" : "hover:bg-gray-50"
+                  }`}
                 >
                   <article className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    {/* Bokningsinformation */}
                     <div className="space-y-1">
                       <header className="flex items-center gap-3">
                         <h3 className="text-lg font-semibold text-gray-900">
@@ -229,10 +225,8 @@ export function BokningarSida() {
               );
             })}
           </ul>
-        </section>
+        </div>
       )}
-    </main>
+    </section>
   );
 }
-
-export default BokningarSida;

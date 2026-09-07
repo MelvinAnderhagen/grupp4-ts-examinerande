@@ -18,6 +18,15 @@
       "utrustning": [
         "projektor"
       ]
+    },
+    {
+      "name": "Grupprum C",
+      "capacity": 4,
+      "plats": "Plan 2",
+      "utrustning": [
+        "TV"
+      ],
+      "id": "i4XmBt1Fwb4"
     }
   ],
   "bokningar": [
@@ -39,5 +48,6 @@
       "endTime": "15:00",
       "status": "cancelled"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

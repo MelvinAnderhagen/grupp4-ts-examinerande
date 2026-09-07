@@ -13,9 +13,6 @@ export function Home() {
         <li>
           <Link to="/rumsida">Tillgängliga grupprum</Link>
         </li>
-        <li>
-          <Link to="/bokningarsida">Alla bokningar</Link>
-        </li>
       </ul>
     </div>
   );
