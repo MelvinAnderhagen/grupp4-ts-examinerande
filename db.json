@@ -5,28 +5,49 @@
       "name": "Grupprum A",
       "plats": "Plan 2",
       "capacity": 4,
-      "utrustning": [
-        "whiteboard",
-        "skärm"
-      ]
+      "utrustning": ["whiteboard", "skärm"]
     },
     {
       "id": "2",
       "name": "Grupprum B",
       "plats": "Plan 3",
       "capacity": 6,
-      "utrustning": [
-        "projektor"
-      ]
+      "utrustning": ["projektor"]
     },
     {
-      "name": "Grupprum C",
-      "capacity": 4,
-      "plats": "Plan 2",
-      "utrustning": [
-        "TV"
-      ],
-      "id": "i4XmBt1Fwb4"
+      "id": "3",
+      "name": "Grupprum D",
+      "plats": "Plan 1",
+      "capacity": 6,
+      "utrustning": ["projektor"]
+    },
+    {
+      "id": "4",
+      "name": "Grupprum A + B",
+      "plats": "Plan 6",
+      "capacity": 6,
+      "utrustning": ["projektor"]
+    },
+    {
+      "id": "5",
+      "name": "Grupprum L",
+      "plats": "Plan 5",
+      "capacity": 6,
+      "utrustning": ["projektor"]
+    },
+    {
+      "id": "6",
+      "name": "Grupprum V",
+      "plats": "Plan 4",
+      "capacity": 8,
+      "utrustning": ["whiteboard", "skärm", "projektor"]
+    },
+    {
+      "id": "7",
+      "name": "Grupprum B",
+      "plats": "Plan 3",
+      "capacity": 6,
+      "utrustning": ["projektor"]
     }
   ],
   "bokningar": [
@@ -48,6 +69,5 @@
       "endTime": "15:00",
       "status": "cancelled"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
