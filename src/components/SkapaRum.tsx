@@ -55,11 +55,10 @@ export function SkapaRum() {
       {rumMessage && (
         <aside
           role="status"
-          className={`p-4 rounded-md mb-6 border ${
-            rumMessage.type === "success"
+          className={`p-4 rounded-md mb-6 border ${rumMessage.type === "success"
               ? "bg-emerald-50 text-emerald-800 border-emerald-200"
               : "bg-rose-50 text-rose-800 border-rose-200"
-          }`}
+            }`}
         >
           {rumMessage.text}
         </aside>

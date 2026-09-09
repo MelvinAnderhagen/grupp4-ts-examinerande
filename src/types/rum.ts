@@ -3,5 +3,5 @@ export interface Rum {
   name: string;
   capacity: number;
   plats: string;
-  utrustning: string[]; //ex: whiteboard, projector, osv.
+  utrustning: string[];
 }
