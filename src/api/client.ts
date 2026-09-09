@@ -56,6 +56,7 @@ export async function apiPatch<T, B = Partial<T>>(endpoint: string, body: B): Pr
 
 /**
  * Generisk DELETE-funktion för att ta bort en resurs.
+ * Hanterar även 204 No Content och tomma svarsmeddelanden.
  */
 export async function apiDelete<T = void>(endpoint: string): Promise<T> {
   const url = endpoint.startsWith("http") ? endpoint : `${BASE_URL}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
@@ -67,5 +68,13 @@ export async function apiDelete<T = void>(endpoint: string): Promise<T> {
     throw new Error(`Kunde inte ta bort resurs på ${endpoint} (Status: ${response.status})`);
   }
 
-  return (await response.json()) as T;
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
+  try {
+    return (await response.json()) as T;
+  } catch {
+    return undefined as T;
+  }
 }

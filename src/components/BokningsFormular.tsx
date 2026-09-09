@@ -19,7 +19,7 @@ export function BokningsFormular({
   onBookingCreated,
   onCancel,
 }: BokningsFormularProps) {
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("sv-SE");
 
   const [bokningsEmail, setBokningsEmail] = useState("");
   const [date, setDate] = useState(today);
@@ -32,13 +32,11 @@ export function BokningsFormular({
     e.preventDefault();
     setErrorMessage(null);
 
-    // Validera att sluttid är efter starttid
     if (startTime >= endTime) {
       setErrorMessage("Sluttiden måste vara senare än starttiden.");
       return;
     }
 
-    // Validera att man inte bokar en tidpunkt som redan passerat
     const bookingStartDateTime = new Date(`${date}T${startTime}`);
     if (!isNaN(bookingStartDateTime.getTime()) && bookingStartDateTime < new Date()) {
       setErrorMessage("Du kan inte boka en tidpunkt som redan har passerat.");
@@ -54,7 +52,6 @@ export function BokningsFormular({
       status: "confirmed",
     };
 
-    // Dubbelbokningskontroll i frontend
     const isDoubleBooked = checkDoubleBooking(newBookingData, existingBookings);
 
     if (isDoubleBooked) {

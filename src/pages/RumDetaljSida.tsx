@@ -46,13 +46,19 @@ export function RumDetaljSida() {
     loadData();
   }, [loadData]);
 
+  // Rensa timeout korrekt vid unmount för att undvika minnesläckor
+  useEffect(() => {
+    if (!successNotice) return;
+    const timer = setTimeout(() => {
+      setSuccessNotice(null);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, [successNotice]);
+
   const handleBookingCreated = (newBooking: Bokning) => {
     setBokningar((prev) => [...prev, newBooking]);
     setShowBookingForm(false);
     setSuccessNotice(`Bokningen för ${newBooking.date} kl ${newBooking.startTime}–${newBooking.endTime} är bekräftad!`);
-    setTimeout(() => {
-      setSuccessNotice(null);
-    }, 6000);
   };
 
   const renderStatusBadge = (status: Bokning["status"]) => {
