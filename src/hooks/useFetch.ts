@@ -1,39 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { apiGet } from "../api/client";
 
-interface useFetchProps<T> {
+interface UseFetchResult<T> {
   data: T | undefined;
   loading: boolean;
   error: string | undefined;
+  refetch: () => Promise<void>;
 }
 
-const BASE_URL = "http://localhost:3000";
-
-export function useFetch<T>(url: string): useFetchProps<T> {
+export function useFetch<T>(url: string): UseFetchResult<T> {
   const [data, setData] = useState<T | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | undefined>(undefined);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError(undefined);
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError(undefined);
 
-      try {
-        const response = await fetch(`${BASE_URL}${url}`);
-        if (!response.ok) {
-          throw new Error(`Error fetching data from ${url}`);
-        }
-        const result: T = await response.json();
-        setData(result);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    try {
+      const result = await apiGet<T>(url);
+      setData(result);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
   }, [url]);
 
-  return { data, loading, error };
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, refetch: fetchData };
 }
