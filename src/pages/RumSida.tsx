@@ -43,65 +43,67 @@ export function RumSida() {
         getKey={(r) => r.id}
         emptyMessage="Inga grupprum hittades just nu."
         renderItem={(r, index) => (
-          <Card className="rounded-xl border border-gray-200 bg-white shadow-xs hover:border-gray-400 transition-all p-5">
-            <CardHeader className="p-0 pb-3 flex flex-row items-center justify-between">
-              <div className="flex items-center gap-3">
-                <CardDescription className="font-mono text-sm text-gray-400 font-semibold">
-                  #{String(index + 1).padStart(2, "0")}
-                </CardDescription>
-                <CardTitle className="text-xl font-bold text-gray-900">
-                  {r.name}
-                </CardTitle>
-              </div>
-
-              <CardAction className="m-0">
-                <Badge
-                  variant="outline"
-                  className="gap-1.5 rounded-full border-gray-200 bg-gray-50 px-3 py-1 text-xs text-gray-700"
-                >
-                  <Users className="h-3.5 w-3.5 text-gray-500" />
-                  {r.capacity} platser
-                </Badge>
-              </CardAction>
-            </CardHeader>
-
-            <CardContent className="p-0 pt-2 space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="h-4 w-4 text-gray-400" />
-                  <span>{r.plats}</span>
+          <Link
+            to={`/rumdetaljsida/${r.id}`}
+            className="group block rounded-xl focus:outline-hidden focus:ring-2 focus:ring-gray-900"
+          >
+            <Card className="rounded-xl border border-gray-200 bg-white shadow-xs group-hover:border-gray-900 group-hover:shadow-md transition-all p-5 cursor-pointer">
+              <CardHeader className="p-0 pb-3 flex flex-row items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <CardDescription className="font-mono text-sm text-gray-400 font-semibold group-hover:text-gray-600 transition-colors">
+                    #{String(index + 1).padStart(2, "0")}
+                  </CardDescription>
+                  <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-black transition-colors">
+                    {r.name}
+                  </CardTitle>
                 </div>
 
-                {r.utrustning && r.utrustning.length > 0 && (
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <Monitor className="h-3.5 w-3.5 text-gray-400" />
-                    {r.utrustning.map((item, idx) => (
-                      <span
-                        key={idx}
-                        className="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600 font-medium"
-                      >
-                        {item}
-                      </span>
-                    ))}
+                <CardAction className="m-0">
+                  <Badge
+                    variant="outline"
+                    className="gap-1.5 rounded-full border-gray-200 bg-gray-50 px-3 py-1 text-xs text-gray-700"
+                  >
+                    <Users className="h-3.5 w-3.5 text-gray-500" />
+                    {r.capacity} platser
+                  </Badge>
+                </CardAction>
+              </CardHeader>
+
+              <CardContent className="p-0 pt-2 space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600">
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="h-4 w-4 text-gray-400" />
+                    <span>{r.plats}</span>
                   </div>
-                )}
-              </div>
 
-              <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
-                <span className="text-xs text-emerald-700 font-medium bg-emerald-50 px-2.5 py-1 rounded-full">
-                  Tillgänglig för bokning
-                </span>
+                  {r.utrustning && r.utrustning.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <Monitor className="h-3.5 w-3.5 text-gray-400" />
+                      {r.utrustning.map((item, idx) => (
+                        <span
+                          key={idx}
+                          className="rounded-md bg-gray-100 px-2 py-0.5 text-xs text-gray-600 font-medium"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
-                <Link
-                  to={`/rumdetaljsida/${r.id}`}
-                  className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-xs hover:bg-gray-800 transition-colors"
-                >
-                  Boka rum
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
+                <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
+                  <span className="text-xs text-emerald-700 font-medium bg-emerald-50 px-2.5 py-1 rounded-full">
+                    Tillgänglig för bokning
+                  </span>
+
+                  <span className="inline-flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white shadow-xs group-hover:bg-gray-800 transition-colors">
+                    Visa detaljer & boka
+                    <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         )}
       />
     </div>
