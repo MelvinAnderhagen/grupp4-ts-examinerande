@@ -1,7 +1,7 @@
 # Kodgranskning: Bokningssystem (BALLERS)
 
 **Granskad grupp:** BALLERS  
-**Granskare:** [Ameer,]  
+**Granskare:** [Ameer, Roger, Kire, Melvin]  
 **Datum:** 2026-09-09  
 **Moment:** Kodgranskning mellan grupper (Mål 6)
 
