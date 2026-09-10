@@ -6,8 +6,8 @@
 ### Gruppmedlemmar
 - Ameer Shameel (`amir0321`)
 - Melvin Anderhagen (`MelvinAnderhagen`)
-- Roger Dushime (`roger-dotcom`)
-- Kirey (`kirey661`)
+- Roger Björling (`roger-dotcom`)
+- Kirey Pérez (`kirey661`)
 
 **Länk till GitHub-repository:**  
 [https://github.com/MelvinAnderhagen/grupp4-ts-examinerande](https://github.com/MelvinAnderhagen/grupp4-ts-examinerande)
