@@ -6,6 +6,7 @@ interface PageModule {
   default?: ComponentType;
   navOrder?: number;
   navTitle?: string;
+  hideFromNav?: boolean;
   [key: string]: unknown;
 }
 
@@ -17,6 +18,7 @@ export interface NavItem {
 }
 
 export const navLinks: NavItem[] = Object.entries(pages)
+  .filter(([, module]) => !module.hideFromNav)
   .map(([path, module]) => {
     const fileName = path.replace("./pages/", "").replace(".tsx", "");
     const isHome = fileName.toLowerCase() === "home";
