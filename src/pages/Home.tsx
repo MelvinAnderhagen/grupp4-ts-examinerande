@@ -18,7 +18,6 @@ export function Home() {
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Kort 1: Rum */}
         <article className="flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-xs hover:border-gray-400 transition-colors">
           <div>
             <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-gray-900">
@@ -39,7 +38,6 @@ export function Home() {
           </Link>
         </article>
 
-        {/* Kort 2: Admin / Bokningar */}
         <article className="flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 shadow-xs hover:border-gray-400 transition-colors">
           <div>
             <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4 text-gray-900">

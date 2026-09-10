@@ -137,7 +137,6 @@ export function AdminBokningar() {
         </aside>
       )}
 
-      {/* Generisk List<T>-komponent återanvänd för Bokning i Admin */}
       <List<Bokning>
         items={bokningar}
         loading={loading}
