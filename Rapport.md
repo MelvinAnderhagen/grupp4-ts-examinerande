@@ -20,7 +20,7 @@
 Under projektets gång märkte vi snabbt att TypeScript gav oss en helt annan trygghet än om vi hade byggt systemet i ren JavaScript. I ett bokningssystem där flera vyer hanterar samma information – som rumslistor, bokningsformulär och adminöversikt – minskade TypeScript risken för slarvfel avsevärt.
 
 1. **Gemensamma kontrakt i teamet:** När vi tidigt definierade våra interfaces (`Rum`, `Bokning`, `NewBokning`) visste alla i gruppen exakt vilka fält som fanns och vilka datatyper som gällde. Vi slapp diskussioner och buggar kring om ett fält hette `roomName`, `roomId` eller `room_name`.
-2. **Snabb återkoppling i editorn vid ändringar:** När vi under sprinten behövde uppdatera våra modeller (t.ex. lägga till union-typen `BokningsStatus = "active" | "cancelled"` eller utöka `Rum` med utrustningslistan `utrustning: string[]`) markerade editorn direkt de filer som påverkades. I vanlig JavaScript hade vi behövt klicka runt manuellt i webbläsaren för att upptäcka var koden kraschade.
+2. **Snabb återkoppling i editorn vid ändringar:** När vi under sprinten behövde uppdatera våra modeller (t.ex. lägga till union-typen för status `"confirmed" | "pending" | "cancelled"` eller utöka `Rum` med utrustningslistan `utrustning: string[]`) markerade editorn direkt de filer som påverkades. I vanlig JavaScript hade vi behövt klicka runt manuellt i webbläsaren för att upptäcka var koden kraschade.
 3. **Autokomplettering och dokumentation:** Funktioner som vår dubbelbokningskontroll (`checkDoubleBooking`) och återanvändbara komponenter blev självdokumenterande. Vi behövde sällan fråga varandra vad en viss funktion tog emot för argument, eftersom TypeScript visade det direkt vid anrop.
 
 ### Vad kostade den extra syntaxen och arbetsinsatsen?
@@ -85,23 +85,19 @@ const [showBookingForm, setShowBookingForm] = useState(false);
 #### 1. Domänmodeller och Utility Types i `src/types/`
 I modellfilerna [src/types/bokning.ts](file:///Users/amir/Desktop/School/Project/TypeScript/Examination/grupp4-ts-examinerande/src/types/bokning.ts) och [src/types/newBokning.ts](file:///Users/amir/Desktop/School/Project/TypeScript/Examination/grupp4-ts-examinerande/src/types/newBokning.ts) definierade vi våra kärntyper explicit:
 ```typescript
-export type BokningsStatus = "active" | "cancelled";
-
 export interface Bokning {
   id: string;
   roomId: string;
-  roomName: string;
-  bookerName: string;
-  bookerEmail: string;
+  bokningsEmail: string;
   date: string;
   startTime: string;
   endTime: string;
-  status: BokningsStatus;
+  status: "confirmed" | "pending" | "cancelled";
 }
 
 export type NewBokning = Omit<Bokning, "id">;
 ```
-- **Motivering:** Kompilatorn kan inte gissa vad en bokning ska innehålla utan att vi talar om det. Genom att explicit definiera `BokningsStatus` som `"active" | "cancelled"` begränsar vi fältet så att inga ogiltiga strängar kan sparas. Vi använde även utility-typen `Omit<Bokning, "id">` för att explicit skapa typen `NewBokning` för data som skickas från formuläret innan servern har hunnit tilldela ett unikt `id`.
+- **Motivering:** Kompilatorn kan inte gissa vad en bokning ska innehålla utan att vi talar om det. Genom att explicit definiera status som en union-typ (`"confirmed" | "pending" | "cancelled"`) begränsar vi fältet så att inga ogiltiga strängar kan sparas. Vi använde även utility-typen `Omit<Bokning, "id">` för att explicit skapa typen `NewBokning` för data som skickas från formuläret innan servern har hunnit tilldela ett unikt `id`.
 
 #### 2. Generiska props i komponenten `List<T>`
 I komponenten [src/components/List.tsx](file:///Users/amir/Desktop/School/Project/TypeScript/Examination/grupp4-ts-examinerande/src/components/List.tsx) behövde vi en gemensam lista som kunde rendera både `Rum` och `Bokning`:
