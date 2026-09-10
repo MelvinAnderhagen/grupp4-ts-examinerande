@@ -35,7 +35,6 @@ export function RumSida() {
         </p>
       </header>
 
-      {/* Generisk List<T>-komponent använd för Rum */}
       <List<Rum>
         items={rum}
         loading={loading}

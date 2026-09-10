@@ -46,7 +46,6 @@ export function RumDetaljSida() {
     loadData();
   }, [loadData]);
 
-  // Rensa timeout korrekt vid unmount för att undvika minnesläckor
   useEffect(() => {
     if (!successNotice) return;
     const timer = setTimeout(() => {
@@ -196,7 +195,6 @@ export function RumDetaljSida() {
           </p>
         </div>
 
-        {/* Generisk List<T>-komponent återanvänd för Bokning */}
         <List<Bokning>
           items={bokningar}
           loading={loading}
