@@ -16,7 +16,7 @@ export function checkDoubleBooking(
       return false;
     }
 
-    if (booking.roomId !== newBooking.roomId || booking.date !== newBooking.date) {
+    if (String(booking.roomId) !== String(newBooking.roomId) || booking.date !== newBooking.date) {
       return false;
     }
 
