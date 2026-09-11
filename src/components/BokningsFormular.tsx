@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import type { Bokning } from "../types/bokning";
 import type { NewBokning } from "../types/newBokning";
+import { apiGet } from "../api/client";
 import { postBokning } from "../api/postBokning";
 import { checkDoubleBooking } from "../utils/checkDoubleBooking";
 
@@ -52,6 +53,7 @@ export function BokningsFormular({
       status: "confirmed",
     };
 
+    // Snabb lokal kontroll först
     const isDoubleBooked = checkDoubleBooking(newBookingData, existingBookings);
 
     if (isDoubleBooked) {
@@ -64,6 +66,21 @@ export function BokningsFormular({
     setIsSubmitting(true);
 
     try {
+      // Hämta färska bokningar från servern för att kontrollera om någon annan bokat samma tid samtidigt
+      const allaBokningar = await apiGet<Bokning[]>("/bokningar");
+      const aktuellaRummetsBokningar = allaBokningar.filter(
+        (b) => String(b.roomId) === String(roomId)
+      );
+
+      const isDoubleBookedOnServer = checkDoubleBooking(newBookingData, aktuellaRummetsBokningar);
+      if (isDoubleBookedOnServer) {
+        setErrorMessage(
+          "Den valda tiden blev precis bokad av en annan användare. Vänligen välj en annan tidpunkt eller ett annat datum."
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
       const createdBooking = await postBokning(newBookingData);
       onBookingCreated(createdBooking);
       setBokningsEmail("");
